@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Alumni</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /*  CSS  */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navigation {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .navigation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navigation ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .navigation ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .navigation ul li a:hover {
+            background-color: #575757;
+        }
+
+        .main {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        .invalid-feedback {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Alumni</a></li>
+            <li><a href="#">Donations</a></li>
+            <li><a href="#">Sign Out</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="main">
+            <h2>Manage Alumni</h2>
+            <form id="alumniForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control">
+                    <span class="invalid-feedback" id="nameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control">
+                    <span class="invalid-feedback" id="emailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone" class="form-control">
+                    <span class="invalid-feedback" id="phoneError"></span>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn" onclick="addAlumni()">Add Alumni</button>
+                </div>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="alumniList">
+                    <!-- Alumni added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function addAlumni() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+
+            let isValid = true;
+
+            if (!name) {
+                nameError.textContent = 'Please enter a name.';
+                isValid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            if (!email) {
+                emailError.textContent = 'Please enter an email.';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            if (!phone) {
+                phoneError.textContent = 'Please enter a phone number.';
+                isValid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            if (isValid) {
+                const table = document.getElementById('alumniList');
+                const row = table.insertRow();
+                row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${phone}</td>
+                    <td>
+                        <button class="btn btn-warning" onclick="editAlumni(this)">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteAlumni(this)">Delete</button>
+                    </td>
+                `;
+
+                // Clear the form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+            }
+        }
+
+        function editAlumni(button) {
+            const row = button.parentNode.parentNode;
+            const name = row.cells[0].textContent;
+            const email = row.cells[1].textContent;
+            const phone = row.cells[2].textContent;
+
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+            document.getElementById('phone').value = phone;
+
+            row.remove();
+        }
+
+        function deleteAlumni(button) {
+            const row = button.parentNode.parentNode;
+            row.remove();
+        }
+    </script>
+</body>
+</html>
