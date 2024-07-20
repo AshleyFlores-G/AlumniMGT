@@ -1,135 +1,152 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
-    font-family:"Ubuntu", sans-serif;
-    margin:0;
-    padding:0;
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --yellow: #f2d813;
-    --white:#fff;
-    --gray:#f5f5f5;
-    --black1:#222;
-    --black2:#999;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #0d0c0c;
+    --black2: #aaa7a7;
 }
 
-body{
+body {
     min-height: 100vh;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 .container {
     position: relative;
     width: 100%;
 }
-/*navigation*/
+
+/* Navigation */
 .navigation {
-    position:fixed;
-    width:300px;
-    height:100%;
-    background: var(--black1);
-    border-left:25px solid var(--yellow);
-    transition:0.9s;
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(380deg, var(--black2), var(--black1));
+    border-left: 25px solid var(--yellow);
+    transition: 0.9s;
     overflow: hidden;
 }
-.navigation.active{
+
+.navigation.active {
     width: 80px;
 }
-.navigation ul{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
-.navigation ul li{
-    position:relative;
-    width:100%;
-    list-style:none;
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
+
 .navigation ul li:hover,
 .navigation ul li.hovered {
     background-color: var(--white);
 }
-.navigation ul li:nth-child(1){
-    margin-bottom:40px;
-    pointer-events:none;
-}
-.navigation ul li a{
-    position:relative;
-    display: block;
-    width:100%;
-    display:flex;
-    text-decoration:none;
-    color: var(--white);
-}
-.navigation ul li:hover a
-{
-    color:var(--yellow);
-}
-.navigation ul li a .icon{
-    position:relative;
-    display:block;
-    min-width: 60px;
-    height:60px;
-    line-height:75px;
-    text-align:center;
-}
-.navigation ul li a .icon ion-icon{
-    font-size:1.75rem;
-}
-.navigation ul li a .title{
-    position:relative;
-    display:block;
-    padding:0 10px;
-    height:60px;
-    line-height:60px;
-    text-align:start;
-    white-space:nowrap;
-}
-/* curve styles*/
-.navigation ul li:hover a::before{
-    content: '';
-    position:absolute;
-    right:0;
-    top:-50px;
-    width: 50px;
-    height:50px;
-    background-color:transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
-    pointer-events:none;
-}
-.navigation ul li:hover a::after{
-    content: '';
-    position:absolute;
-    right:0;
-    bottom:-50px;
-    width: 50px;
-    height:50px;
-    background-color:transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events:none;
-}
-/*Main*/
-.main{
-    position:absolute;
-    width: 100%;
-    left:300px;
-    min-height:100vh;
-    background:var(--white);
-    transition:0.9s;
-}
-.main.active{
-    width:calc(100%-80px);
-    left:80px;
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
 }
 
-.topbar{
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.navigation ul li:hover a {
+    color: var(--yellow);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+
+.navigation ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* Curve styles */
+.navigation ul li:hover a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li:hover a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+/* Main */
+.main {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.9s;
+}
+
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.topbar {
     width: 100%;
     height: 60px;
     display: flex;
@@ -138,11 +155,13 @@ body{
     padding: 10px 20px;
     background-color: var(--background-color, #f8f8f8);
 }
-.toggle .user{
-    display:flex;
-    align-items:center;
+
+.toggle .user {
+    display: flex;
+    align-items: center;
 }
-.toggle{
+
+.toggle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,39 +170,44 @@ body{
     font-size: 2.5rem;
     cursor: pointer;
 }
-.search{
+
+.search {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.search label{
+
+.search label {
     display: flex;
     align-items: center;
     width: 100%;
     max-width: 400px;
     position: relative;
 }
-.search label input{
-    width:100%;
-    height:40px;
+
+.search label input {
+    width: 100%;
+    height: 40px;
     border-radius: 40px;
-    padding:5px 20px;
+    padding: 5px 20px;
     padding-left: 35px;
     font-size: 18px;
-    outline:none;
-    border:1px solid var(--black2);
+    outline: none;
+    border: 1px solid var(--black2);
 }
-.search label ion-icon{
-    position:absolute;
-    top:50%;
-    left:10px;
-    font-size:1.2rem;
-    color:#333;
+
+.search label ion-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 1.2rem;
+    color: #333;
     transform: translateY(-50%);
 }
-.user{
-    display:flex;
+
+.user {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -192,46 +216,55 @@ body{
     overflow: hidden;
     cursor: pointer;
 }
-.user img{
-    position:absolute;
-    width:100%;
-    height:100%
+
+.user img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
+
 @media screen and (max-width: 768px) {
-    #content {
-    width: calc (100% - 60px) ;
+    .main {
+        width: calc(100% - 80px);
+        left: 80px;
+    }
+    .cardBox {
+        flex-direction: column;
+        align-items: center;
     }
 
-#content nav form .form-input button {
-    width: auto;
-    height: auto;
-    background: transparent;
-    border-radius: none;
-    color: var (--dark);
-}
- #content nav form.show .form-input input {
-    display: block;
+    .navigation {
+        width: 80px;
     }
- #content nav form.show .form-input button {
-    width: 36px;
-    height: 100%;
-    border-radius: 0 36px 36px 0;
-    color: var(--light);
-    background: var (--blue) ;
+
+    .navigation.active {
+        width: 300px;
+    }
+
+    .toggle {
+        display: block;
+    }
+
+    .topbar .search label {
+        max-width: 200px;
     }
 }
-/*============ Cards ============*/
+
+/* Cards */
 .cardBox {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 20px;
     flex-wrap: wrap;
-    margin-top: 50px;
+    justify-content:center;
+    gap: 30px;
+    width: 100%;
+    padding: 10px;
+    flex-wrap: wrap;
+    margin-top: 0 auto;
 }
 
 .card {
-    width: 475px;
+    width: 450px;
+    max-width:450px;
     background: var(--white);
     padding: 20px;
     border-radius: 15px;
@@ -239,13 +272,16 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
 }
 
 .card .numbers {
     font-size: 2.5rem;
-    font-weight: 500;
+    font-weight: 520;
     color: var(--black1);
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .card .cardName {
@@ -253,39 +289,71 @@ body{
     color: var(--black2);
     text-align: center;
 }
+.card:hover{
+    transform:translateY(-5px);
+}
 
 .card .iconBx {
     font-size: 3rem;
     color: var(--yellow);
     margin-top: 10px;
-    width:100%;
+    width: 100%;
 }
 
 .details {
     width: 100%;
-    padding:20px;
-    border-radius:15px;
+    padding: 20px;
+    border-radius: 15px;
 }
-.recentGraduates .card{
-    width:500px;
-}
+
 .recentGraduates {
-    width: calc(100%-50px);/* Make this card wider */
+    width: 100%; /* Make this card wider */
+    margin: auto;
+    padding: 0px;
+    align-items: center;
+}
+.alumni{
+    width:100%;
     margin:auto;
-    padding: 30px; 
+    padding:10px;
 }
 
 .cardHeader {
-    display:flex;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     width: 100%;
 }
-
+.HeaderContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.cardHeader .iconBx {
+    font-size: 2rem;
+}
+.iconBx{
+    font-size: 2rem;
+    color: #333;
+}
+.card-link{
+    text-decoration: none;
+    color:inherit;
+}
 .cardHeader h2 {
     font-size: 1.5rem;
     color: var(--black1);
-    margin-bottom: 10px;
+    margin: 0px;
+}
+.card .btn{
+    margin-top: 10px;
+    padding: 10px 20px;
+    color: #232222;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .cardHeader .btn {
@@ -297,7 +365,7 @@ body{
 }
 
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin-top: 10px;
 }
@@ -309,8 +377,8 @@ table thead tr {
 
 table thead th,
 table thead td {
-    padding: 10px;
-    text-align: left;
+    padding:0px;
+    text-align:center;
 }
 
 table tbody tr:nth-child(even) {
@@ -318,6 +386,7 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody tr td {
-    padding: 10px;
-    color: var(--black2);
+    padding: 7px;
+    color: var(--black1);
 }
+
